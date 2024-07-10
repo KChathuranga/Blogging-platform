@@ -1,20 +1,31 @@
 require('dotenv').config()
 
 const express = require('express');
-const blogRoutes = require('./routes/blog')
+const mongoose = require('mongoose');
+const blogRoutes = require('./routes/blogRoutes');
 
 //express app
 const app = express();
+
 //middleware
+app.use(express.json())
+
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next();
 });
 
 //routes
-app.use('/api/routes', blogRoutes())
+app.use('/api/blogs', blogRoutes)
 
-//listen on request
-app.listen(process.env.PORT, () => {
-    console.log('listening on port', process.env.PORT)
-})
+//Connect to the database
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        //listen on request
+        app.listen(process.env.PORT, () => {
+        console.log('Connected to the database & listening on port', process.env.PORT)
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
