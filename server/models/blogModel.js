@@ -13,7 +13,7 @@ const blogPostSchema = new Schema({
         required: true
     },
     date: {
-        type: Date,
+        type: String,
         required: true
     },
     images: {
@@ -21,4 +21,4 @@ const blogPostSchema = new Schema({
     }
 }, { timestamps: true})
 
-module.exports = mongosose.module('Blog', blogPostSchema)
+module.exports = mongoose.model('Blog', blogPostSchema)
