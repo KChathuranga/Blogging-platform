@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const Blog = require('../models/blogModel')
 
 const Schema = mongoose.Schema
 
