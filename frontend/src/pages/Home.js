@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 const Home = () => {
-    
+    const [blogs, setBlogs] = useState(null)
+
     useEffect(() => {
         const fetchBlogs = async () => {
-            const response = await fetch('https://localhost:4000/api/blogs')
+            const response = await fetch('/api/blogs')
             const json = await response.json();
 
             if(response.ok){
@@ -17,7 +18,11 @@ const Home = () => {
 
     return (
         <div className="home">
-            <h2>Home Page</h2>
+            <div className="blogs">
+                {blogs && blogs.map(() => (
+                    <p key={blogs._id}>{blogs.title}</p>
+                ))}
+            </div>
         </div>
     )
 }
